@@ -31,8 +31,33 @@ const NavBar = ({ mode, toggleMode }) => {
       </style>
 
       <nav className={`navbar fixed-top navbar-expand-lg navbar-${mode} bg-${mode} shadow-sm py-3`}>
-        <div className="container-fluid px-4">
+        <div className="container-fluid px-4 d-flex justify-content-between align-items-center">
+
+          {/* Logo */}
           <Link className="navbar-brand fw-bold fs-4" to="/">📰 NewsFlux</Link>
+
+          {/* Mobile: Search + Dark Toggle */}
+          <div className="d-flex align-items-center gap-2 d-lg-none">
+            <button
+              className={`btn btn-outline-${mode === 'light' ? 'dark' : 'light'}`}
+              onClick={() => setShowSearch(!showSearch)}
+            >
+              <i className="fas fa-search"></i>
+            </button>
+
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="mobileDarkModeToggle"
+                onChange={toggleMode}
+                checked={mode === 'dark'}
+              />
+            </div>
+          </div>
+
+          {/* Hamburger */}
           <button
             className="navbar-toggler"
             type="button"
@@ -45,7 +70,8 @@ const NavBar = ({ mode, toggleMode }) => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarNav">
+          {/* Collapsible Menu */}
+          <div className="collapse navbar-collapse mt-3 mt-lg-0" id="navbarNav">
             <ul className="navbar-nav me-auto gap-2 text-center">
               <li className="nav-item"><Link className="nav-link" to="/business">Business</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/entertainment">Entertainment</Link></li>
@@ -56,7 +82,8 @@ const NavBar = ({ mode, toggleMode }) => {
               <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
             </ul>
 
-            <div className="d-flex align-items-center gap-2">
+            {/* Desktop: Search + Dark Toggle */}
+            <div className="d-none d-lg-flex align-items-center gap-2">
               {showSearch && (
                 <form className="d-flex align-items-center" onSubmit={handleSearch}>
                   <input
@@ -75,26 +102,27 @@ const NavBar = ({ mode, toggleMode }) => {
                   />
                 </form>
               )}
+
               <button
                 className={`btn btn-outline-${mode === 'light' ? 'dark' : 'light'}`}
                 onClick={() => setShowSearch(!showSearch)}
               >
                 <i className="fas fa-search"></i>
               </button>
-            </div>
 
-            <div className="form-check form-switch ms-3">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="darkModeToggle"
-                onChange={toggleMode}
-                checked={mode === 'dark'}
-              />
-              <label className={`form-check-label text-${mode === 'light' ? 'dark' : 'light'}`} htmlFor="darkModeToggle">
-                {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
-              </label>
+              <div className="form-check form-switch ms-3">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="darkModeToggle"
+                  onChange={toggleMode}
+                  checked={mode === 'dark'}
+                />
+                <label className={`form-check-label text-${mode === 'light' ? 'dark' : 'light'}`} htmlFor="darkModeToggle">
+                  {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
+                </label>
+              </div>
             </div>
           </div>
         </div>
