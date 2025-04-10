@@ -1,10 +1,9 @@
-// SearchResults.jsx
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import NewsItem from './NewsItem';
 import Spinner from './Spinner';
 
-const SearchResults = ({ apiKey }) => {
+const SearchResults = () => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const query = new URLSearchParams(useLocation().search).get('q');
@@ -15,8 +14,8 @@ const SearchResults = ({ apiKey }) => {
 
             setLoading(true);
             try {
-                const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${apiKey}&pageSize=10`;
-                const response = await fetch(url);
+                const backendUrl = `https://newsfluxbackend-production.up.railway.app/api/news?q=${encodeURIComponent(query)}&pageSize=10`;
+                const response = await fetch(backendUrl);
                 const data = await response.json();
                 setArticles(data.articles || []);
             } catch (error) {
@@ -27,7 +26,7 @@ const SearchResults = ({ apiKey }) => {
         };
 
         fetchSearchResults();
-    }, [query, apiKey]);
+    }, [query]);
 
     return (
         <div className="container" style={{ marginTop: '100px' }}>
