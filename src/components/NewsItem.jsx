@@ -2,7 +2,7 @@ import React from 'react';
 
 const NewsItem = (props) => {
   let { title, description, imageUrl, newsUrl, author, date, source, mode } = props;
-  const fallbackImage = "https://via.placeholder.com/400x200?text=No+Image";
+  const fallbackImage = "https://placehold.co/600x400/png?text=No+Image";
 
   const cardStyles = {
     minHeight: "480px",
