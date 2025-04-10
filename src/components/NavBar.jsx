@@ -33,11 +33,12 @@ const NavBar = ({ mode, toggleMode }) => {
       <nav className={`navbar fixed-top navbar-expand-lg navbar-${mode} bg-${mode} shadow-sm py-3`}>
         <div className="container-fluid px-4 d-flex justify-content-between align-items-center">
 
-          {/* Left side (Logo + Toggle + Search) */}
-          <div className="d-flex align-items-center gap-3">
-            <Link className="navbar-brand fw-bold fs-4 mb-0" to="/">📰 NewsFlux</Link>
+          {/* Left Side - Logo */}
+          <Link className="navbar-brand fw-bold fs-4 mb-0" to="/">📰 NewsFlux</Link>
 
-            {/* Dark Mode Toggle (always visible) */}
+          {/* Right Side - Toggle, Search, Hamburger */}
+          <div className="d-flex align-items-center gap-3 ms-auto">
+            {/* Dark Mode Toggle */}
             <div className="form-check form-switch m-0">
               <input
                 className="form-check-input"
@@ -49,27 +50,27 @@ const NavBar = ({ mode, toggleMode }) => {
               />
             </div>
 
-            {/* Search Toggle Button (always visible) */}
+            {/* Search Toggle Button */}
             <button
               className={`btn btn-outline-${mode === 'light' ? 'dark' : 'light'} p-2`}
               onClick={() => setShowSearch(!showSearch)}
             >
               <i className="fas fa-search"></i>
             </button>
-          </div>
 
-          {/* Hamburger Menu */}
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+            {/* Hamburger Menu */}
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          </div>
 
           {/* Collapsible Menu */}
           <div className="collapse navbar-collapse mt-3 mt-lg-0" id="navbarNav">
