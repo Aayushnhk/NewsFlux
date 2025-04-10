@@ -33,31 +33,32 @@ const NavBar = ({ mode, toggleMode }) => {
       <nav className={`navbar fixed-top navbar-expand-lg navbar-${mode} bg-${mode} shadow-sm py-3`}>
         <div className="container-fluid px-4 d-flex justify-content-between align-items-center">
 
-          {/* Logo */}
-          <Link className="navbar-brand fw-bold fs-4" to="/">📰 NewsFlux</Link>
+          {/* Left side (Logo + Toggle + Search) */}
+          <div className="d-flex align-items-center gap-3">
+            <Link className="navbar-brand fw-bold fs-4 mb-0" to="/">📰 NewsFlux</Link>
 
-          {/* Mobile: Search + Dark Toggle */}
-          <div className="d-flex align-items-center gap-2 d-lg-none">
-            <button
-              className={`btn btn-outline-${mode === 'light' ? 'dark' : 'light'}`}
-              onClick={() => setShowSearch(!showSearch)}
-            >
-              <i className="fas fa-search"></i>
-            </button>
-
-            <div className="form-check form-switch">
+            {/* Dark Mode Toggle (always visible) */}
+            <div className="form-check form-switch m-0">
               <input
                 className="form-check-input"
                 type="checkbox"
                 role="switch"
-                id="mobileDarkModeToggle"
+                id="darkModeToggle"
                 onChange={toggleMode}
                 checked={mode === 'dark'}
               />
             </div>
+
+            {/* Search Toggle Button (always visible) */}
+            <button
+              className={`btn btn-outline-${mode === 'light' ? 'dark' : 'light'} p-2`}
+              onClick={() => setShowSearch(!showSearch)}
+            >
+              <i className="fas fa-search"></i>
+            </button>
           </div>
 
-          {/* Hamburger */}
+          {/* Hamburger Menu */}
           <button
             className="navbar-toggler"
             type="button"
@@ -82,48 +83,25 @@ const NavBar = ({ mode, toggleMode }) => {
               <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
             </ul>
 
-            {/* Desktop: Search + Dark Toggle */}
-            <div className="d-none d-lg-flex align-items-center gap-2">
-              {showSearch && (
-                <form className="d-flex align-items-center" onSubmit={handleSearch}>
-                  <input
-                    className={`form-control custom-search text-${mode === 'dark' ? 'light' : 'dark'}`}
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{
-                      backgroundColor: mode === 'dark' ? '#212529' : '#fff',
-                      color: mode === 'dark' ? '#f8f9fa' : '#212529',
-                      borderColor: mode === 'dark' ? '#495057' : '#ced4da',
-                      caretColor: mode === 'dark' ? '#f8f9fa' : '#212529',
-                    }}
-                  />
-                </form>
-              )}
-
-              <button
-                className={`btn btn-outline-${mode === 'light' ? 'dark' : 'light'}`}
-                onClick={() => setShowSearch(!showSearch)}
-              >
-                <i className="fas fa-search"></i>
-              </button>
-
-              <div className="form-check form-switch ms-3">
+            {/* Search Bar Input Field (conditional) */}
+            {showSearch && (
+              <form className="d-flex align-items-center mt-3 mt-lg-0" onSubmit={handleSearch}>
                 <input
-                  className="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="darkModeToggle"
-                  onChange={toggleMode}
-                  checked={mode === 'dark'}
+                  className={`form-control custom-search text-${mode === 'dark' ? 'light' : 'dark'}`}
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  style={{
+                    backgroundColor: mode === 'dark' ? '#212529' : '#fff',
+                    color: mode === 'dark' ? '#f8f9fa' : '#212529',
+                    borderColor: mode === 'dark' ? '#495057' : '#ced4da',
+                    caretColor: mode === 'dark' ? '#f8f9fa' : '#212529',
+                  }}
                 />
-                <label className={`form-check-label text-${mode === 'light' ? 'dark' : 'light'}`} htmlFor="darkModeToggle">
-                  {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
-                </label>
-              </div>
-            </div>
+              </form>
+            )}
           </div>
         </div>
       </nav>
