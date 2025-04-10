@@ -22,20 +22,30 @@ const News = (props) => {
   };
 
   const buildUrl = (pg) => {
+    const baseUrl = 'https://newsfluxbackend-production.up.railway.app/api/news';
+
+    const params = new URLSearchParams({
+      page: pg,
+      pageSize: props.pageSize,
+    });
+
     if (isSearchMode && searchTerm) {
-      return `https://newsapi.org/v2/everything?q=${searchTerm}&apiKey=${props.apiKey}&page=${pg}&pageSize=${props.pageSize}`;
+      params.append('q', searchTerm);
     } else {
-      return `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${pg}&pageSize=${props.pageSize}`;
+      params.append('country', props.country);
+      params.append('category', props.category);
     }
+
+    return `${baseUrl}?${params.toString()}`;
   };
 
   const updateNews = async () => {
     props.setProgress(10);
-    const url = buildUrl(page);
+    const url = buildUrl(1);
     setLoading(true);
-    let data = await fetch(url);
+    const data = await fetch(url);
     props.setProgress(30);
-    let parsedData = await data.json();
+    const parsedData = await data.json();
     props.setProgress(70);
     setArticles(parsedData.articles || []);
     setTotalResults(parsedData.totalResults || 0);
@@ -58,8 +68,8 @@ const News = (props) => {
     const nextPage = page + 1;
     const url = buildUrl(nextPage);
     setPage(nextPage);
-    let data = await fetch(url);
-    let parsedData = await data.json();
+    const data = await fetch(url);
+    const parsedData = await data.json();
     setArticles(articles.concat(parsedData.articles || []));
     setTotalResults(parsedData.totalResults || 0);
   };
@@ -109,7 +119,6 @@ News.propTypes = {
   country: PropTypes.string,
   pageSize: PropTypes.number,
   category: PropTypes.string,
-  apiKey: PropTypes.string.isRequired,
   setProgress: PropTypes.func.isRequired,
   mode: PropTypes.string.isRequired,
 };
