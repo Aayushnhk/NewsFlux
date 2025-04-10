@@ -76,10 +76,19 @@ const News = (props) => {
 
   return (
     <>
-      <h1 className={`text-center ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`} style={{ margin: '35px 0px', marginTop: '90px' }}>
+      <h1
+        className={`text-center ${props.mode === 'dark' ? 'text-light' : 'text-dark'}`}
+        style={{
+          marginTop: isSearchMode ? '160px' : '90px',
+          marginBottom: '35px',
+          transition: 'margin-top 0.3s ease'
+        }}
+      >
         NewsFlux - Top {isSearchMode && searchTerm ? `"${capitalizeFirstLetter(searchTerm)}"` : capitalizeFirstLetter(props.category)} Headlines
       </h1>
+
       {loading && <Spinner />}
+
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
