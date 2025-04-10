@@ -21,22 +21,27 @@ const NavBar = ({ mode, toggleMode }) => {
 
   return (
     <>
-      {/* Inject dynamic styles for placeholder */}
       <style>
         {`
           .custom-search::placeholder {
             color: ${mode === 'dark' ? '#adb5bd' : '#6c757d'};
           }
+
+          @media (min-width: 992px) {
+            .navbar-collapse {
+              justify-content: center;
+            }
+          }
         `}
       </style>
 
       <nav className={`navbar fixed-top navbar-expand-lg navbar-${mode} bg-${mode} shadow-sm py-3`}>
-        <div className="container-fluid px-4 d-flex justify-content-between align-items-center">
+        <div className="container-fluid px-4">
 
-          {/* Left Side - Logo */}
+          {/* Left - Logo */}
           <Link className="navbar-brand fw-bold fs-4 mb-0" to="/">📰 NewsFlux</Link>
 
-          {/* Right Side - Toggle, Search, Hamburger */}
+          {/* Right side - Toggle, Search Button, Hamburger */}
           <div className="d-flex align-items-center gap-3 ms-auto">
             {/* Dark Mode Toggle */}
             <div className="form-check form-switch m-0">
@@ -50,7 +55,7 @@ const NavBar = ({ mode, toggleMode }) => {
               />
             </div>
 
-            {/* Search Toggle Button */}
+            {/* Search Icon Button */}
             <button
               className={`btn btn-outline-${mode === 'light' ? 'dark' : 'light'} p-2`}
               onClick={() => setShowSearch(!showSearch)}
@@ -58,9 +63,9 @@ const NavBar = ({ mode, toggleMode }) => {
               <i className="fas fa-search"></i>
             </button>
 
-            {/* Hamburger Menu */}
+            {/* Hamburger for mobile only */}
             <button
-              className="navbar-toggler"
+              className="navbar-toggler d-lg-none"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -72,9 +77,9 @@ const NavBar = ({ mode, toggleMode }) => {
             </button>
           </div>
 
-          {/* Collapsible Menu */}
+          {/* Middle - Collapsible Menu for links (centered on PC) */}
           <div className="collapse navbar-collapse mt-3 mt-lg-0" id="navbarNav">
-            <ul className="navbar-nav me-auto gap-2 text-center">
+            <ul className="navbar-nav mx-lg-auto gap-2 text-center">
               <li className="nav-item"><Link className="nav-link" to="/business">Business</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/entertainment">Entertainment</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/general">General</Link></li>
@@ -83,28 +88,30 @@ const NavBar = ({ mode, toggleMode }) => {
               <li className="nav-item"><Link className="nav-link" to="/sports">Sports</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
             </ul>
-
-            {/* Search Bar Input Field (conditional) */}
-            {showSearch && (
-              <form className="d-flex align-items-center mt-3 mt-lg-0" onSubmit={handleSearch}>
-                <input
-                  className={`form-control custom-search text-${mode === 'dark' ? 'light' : 'dark'}`}
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{
-                    backgroundColor: mode === 'dark' ? '#212529' : '#fff',
-                    color: mode === 'dark' ? '#f8f9fa' : '#212529',
-                    borderColor: mode === 'dark' ? '#495057' : '#ced4da',
-                    caretColor: mode === 'dark' ? '#f8f9fa' : '#212529',
-                  }}
-                />
-              </form>
-            )}
           </div>
         </div>
+
+        {/* Floating Search Input Field (conditionally visible) */}
+        {showSearch && (
+          <div className="container-fluid mt-2 px-4">
+            <form className="d-flex" onSubmit={handleSearch}>
+              <input
+                className={`form-control custom-search text-${mode === 'dark' ? 'light' : 'dark'}`}
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{
+                  backgroundColor: mode === 'dark' ? '#212529' : '#fff',
+                  color: mode === 'dark' ? '#f8f9fa' : '#212529',
+                  borderColor: mode === 'dark' ? '#495057' : '#ced4da',
+                  caretColor: mode === 'dark' ? '#f8f9fa' : '#212529',
+                }}
+              />
+            </form>
+          </div>
+        )}
       </nav>
     </>
   );
