@@ -3,11 +3,10 @@ import { useLocation } from 'react-router-dom';
 import NewsItem from './NewsItem';
 import Spinner from './Spinner';
 
-const SearchResults = (props) => { // Receive props here
+const SearchResults = () => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const query = new URLSearchParams(useLocation().search).get('q');
-    const { mode } = props; // Destructure the mode prop
 
     useEffect(() => {
         const fetchSearchResults = async () => {
@@ -40,8 +39,13 @@ const SearchResults = (props) => { // Receive props here
                         articles.map((article, index) => (
                             <div className="col-md-4" key={index}>
                                 <NewsItem
-                                    {...article}
-                                    mode={mode} // Pass the mode prop to NewsItem
+                                    title={article.title}
+                                    description={article.description}
+                                    imageUrl={article.urlToImage}
+                                    newsUrl={article.url}
+                                    author={article.author}
+                                    date={article.publishedAt}
+                                    source={article.source.name}
                                 />
                             </div>
                         ))
