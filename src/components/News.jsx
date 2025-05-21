@@ -22,7 +22,7 @@ const News = (props) => {
   };
 
   const buildUrl = (pg) => {
-    const baseUrl = 'https://newsfluxbackend-production.up.railway.app/api/news';
+    const baseUrl = 'https://newsfluxbackend.onrender.com/api/news';
 
     const params = new URLSearchParams({
       page: pg,
