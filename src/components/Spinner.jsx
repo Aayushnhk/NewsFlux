@@ -1,12 +1,19 @@
-import React from 'react'
-import loading from './loading.gif'
+import React from 'react';
+import loading from './loading.gif';
 
-const Spinner = ()=> {
-        return (
-            <div className="text-center">
-                <img className="my-3" src={loading} alt="loading" />
-            </div>
-        )
-}
+const Spinner = ({ mode }) => {
+  const divStyle = {
+    padding: '1rem',
+    borderRadius: '8px',
+  };
+  const textClass = `text-${mode === 'dark' ? 'light' : 'dark'}`;
 
-export default Spinner
+  return (
+    <div className="text-center" style={divStyle}>
+      <img className="my-3" src={loading} alt="loading" />
+      <p className={textClass}>Loading news...</p>
+    </div>
+  );
+};
+
+export default Spinner;

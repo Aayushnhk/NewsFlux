@@ -61,6 +61,10 @@ const NavBar = ({ mode, toggleMode }) => {
               width: 100%;
               margin-top: 5px; /* Added slight margin */
             }
+            .nav-categories {
+              position: relative;
+              left: -0%;
+            }
           }
           @media (max-width: 991.98px) {
             .mobile-search-bar {
@@ -106,7 +110,7 @@ const NavBar = ({ mode, toggleMode }) => {
 
           {/* Desktop Menu */}
           <div className="collapse navbar-collapse" id="navbarContent">
-            <ul className="navbar-nav me-auto">
+            <ul className="navbar-nav nav-categories mx-auto">
               {['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'].map((cat) => (
                 <li className="nav-item" key={cat}>
                   <Link className="nav-link" to={`/${cat}`}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</Link>
