@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar';
 
 const App = () => {
-  const pageSize = 5;
+  const pageSize = 6;
   const apiKey = import.meta.env.VITE_NEWS_API;
   const [progress, setProgress] = useState(0);
   const [mode, setMode] = useState('light');
