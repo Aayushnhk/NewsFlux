@@ -22,7 +22,7 @@ const News = (props) => {
   };
 
   const buildUrl = (pg) => {
-    const baseUrl = 'https://newsfluxbackend.onrender.com/api/news';
+    const baseUrl = 'https://newsflux-backend.onrender.com/api/news';
 
     const params = new URLSearchParams({
       page: pg,

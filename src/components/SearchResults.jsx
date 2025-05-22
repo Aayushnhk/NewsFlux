@@ -14,7 +14,7 @@ const SearchResults = (props) => {
 
       setLoading(true);
       try {
-        const backendUrl = `https://newsfluxbackend.onrender.com/api/news?q=${encodeURIComponent(
+        const backendUrl = `https://newsflux-backend.onrender.com/api/news?q=${encodeURIComponent(
           query
         )}&pageSize=10`;
         const response = await fetch(backendUrl);
