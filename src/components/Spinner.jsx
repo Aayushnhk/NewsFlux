@@ -1,17 +1,17 @@
 import React from 'react';
-import loading from './loading.gif';
 
 const Spinner = ({ mode }) => {
-  const divStyle = {
-    padding: '1rem',
-    borderRadius: '8px',
+  const loaderStyle = {
+    '--loader-color': mode === 'dark' ? '#FFF' : '#000',
+    '--loader-accent': mode === 'dark' ? '#FF3D00' : '#FF3D00'
   };
+
   const textClass = `text-${mode === 'dark' ? 'light' : 'dark'}`;
 
   return (
-    <div className="text-center" style={divStyle}>
-      <img className="my-3" src={loading} alt="loading" />
-      <p className={textClass}>Loading news...</p>
+    <div className="text-center d-flex flex-column align-items-center justify-content-center" style={{ height: '100%' }}>
+      <div className="loader" style={loaderStyle}></div>
+      <p className={`${textClass} mt-3`}>Loading news...</p>
     </div>
   );
 };
