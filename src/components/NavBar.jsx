@@ -9,6 +9,7 @@ const NavBar = ({ mode, toggleMode }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [showDesktopSearch, setShowDesktopSearch] = useState(false);
   const desktopSearchInputRef = useRef(null);
+  const searchInputRef = useRef(null);
   useEffect(() => {
     setSearchTerm(queryParam);
   }, [queryParam]);
